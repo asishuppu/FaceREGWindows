@@ -53,12 +53,12 @@ def Compare_face():
       current_image_encoded = face_recognition.face_encodings(current_image)[0]
     except:
         tk.Tk().withdraw()
-        da = mb.showwarning ('Warning!','low light image, please capture in proper light and click ok' ,icon = 'warning')
+        da = mb.showwarning ('Warning!','low light or blur image, please capture proper image' ,icon = 'warning')
         if da != 'ok':
             print('quit')
             sys.exit()
         else:
-            take_pic()
+            return False
 
     result = face_recognition.compare_faces(
           [source_image_encoded], current_image_encoded)
@@ -87,6 +87,7 @@ def take_pic():
                sys.exit()
                return False
             else:
+               take_pic()
                return False
                
         else:
@@ -100,5 +101,3 @@ def take_pic():
 
 cap = cv2.VideoCapture(0)
 take_pic()
-
-
